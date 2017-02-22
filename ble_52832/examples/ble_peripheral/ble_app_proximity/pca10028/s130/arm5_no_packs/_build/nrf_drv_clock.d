@@ -1,0 +1,11 @@
+.\_build\nrf_drv_clock.o: ..\..\..\..\..\..\components\drivers_nrf\clock\nrf_drv_clock.c
+.\_build\nrf_drv_clock.o: ..\config\sdk_config.h
+.\_build\nrf_drv_clock.o: ..\..\..\..\..\..\components\drivers_nrf\clock\nrf_drv_clock.h
+.\_build\nrf_drv_clock.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\_build\nrf_drv_clock.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\_build\nrf_drv_clock.o: ..\..\..\..\..\..\components\libraries\util\sdk_errors.h
+.\_build\nrf_drv_clock.o: ..\..\..\..\..\..\components\softdevice\s130\headers\nrf_error.h
+.\_build\nrf_drv_clock.o: ..\..\..\..\..\..\components\libraries\util\nrf_assert.h
+.\_build\nrf_drv_clock.o: C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.9.0\Device\Include\nrf.h
+.\_build\nrf_drv_clock.o: C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.9.0\Device\Include\nrf51.h
+.\_build\nrf_drv_clock.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h
