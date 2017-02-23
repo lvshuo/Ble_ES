@@ -59,6 +59,8 @@
 #include "nrf_log.h"
 #include "nrf_log_ctrl.h"
 
+#include "nrf_drv_spi.h"
+
 #include "nrf_peripherals.h"
 #ifdef ADC_PRESENT
 #include "nrf_drv_adc.h"
@@ -176,6 +178,18 @@ static nrf_adc_value_t adc_buf[1];
 static nrf_saadc_value_t adc_buf[2];
 #endif //ADC_PRESENT
 
+																	 
+																	 
+#define SPI_INSTANCE  0 /**< SPI instance index. */
+static const nrf_drv_spi_t spi = NRF_DRV_SPI_INSTANCE(SPI_INSTANCE);  /**< SPI instance. */
+static volatile bool spi_xfer_done;  /**< Flag used to indicate that SPI instance completed the transfer. */
+
+#define TEST_STRING "Nordic"
+static uint8_t       m_tx_buf[] = TEST_STRING;           /**< TX buffer. */
+static uint8_t       m_rx_buf[sizeof(TEST_STRING) + 1];    /**< RX buffer. */
+static const uint8_t m_length = sizeof(m_tx_buf);        /**< Transfer length. */																	 
+																	 
+																	 
 /**@brief Callback function for asserts in the SoftDevice.
  *
  * @details This function will be called in case of an assert in the SoftDevice.
@@ -1255,7 +1269,20 @@ static void advertising_start(void)
 
     APP_ERROR_CHECK(err_code);
 }
-
+/**
+ * @brief SPI user event handler.
+ * @param event
+ */
+void spi_event_handler(nrf_drv_spi_evt_t const * p_event)
+{
+    spi_xfer_done = true;
+    NRF_LOG_INFO("Transfer completed.\r\n");
+    if (m_rx_buf[0] != 0)
+    {
+        NRF_LOG_INFO(" Received: \r\n");
+        NRF_LOG_HEXDUMP_INFO(m_rx_buf, strlen((const char *)m_rx_buf));
+    }
+}
 
 /**@brief Function for application main entry.
  */
@@ -1287,6 +1314,14 @@ int main(void)
     NRF_LOG_INFO("Proximity Start!\r\n");
     advertising_start();
 
+		
+		nrf_drv_spi_config_t spi_config = NRF_DRV_SPI_DEFAULT_CONFIG;
+    spi_config.ss_pin   = SPI_SS_PIN;
+    spi_config.miso_pin = SPI_MISO_PIN;
+    spi_config.mosi_pin = SPI_MOSI_PIN;
+    spi_config.sck_pin  = SPI_SCK_PIN;
+    APP_ERROR_CHECK(nrf_drv_spi_init(&spi, &spi_config, spi_event_handler));
+		
     // Enter main loop.
     for (;;)
     {

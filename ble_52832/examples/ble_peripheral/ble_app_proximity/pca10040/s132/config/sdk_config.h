@@ -6,6 +6,64 @@
 #ifdef USE_APP_CONFIG
 #include "app_config.h"
 #endif
+
+// <h> Application 
+
+//==========================================================
+// <h> SPI_CONFIGURATION - Spi configuration
+
+//==========================================================
+// <o> SPI_SCK_PIN - Pin number  <0-31> 
+
+
+#ifndef SPI_SCK_PIN
+#define SPI_SCK_PIN 3
+#endif
+
+// <o> SPI_MISO_PIN - Pin number  <0-31> 
+
+
+#ifndef SPI_MISO_PIN
+#define SPI_MISO_PIN 28
+#endif
+
+// <o> SPI_MOSI_PIN - Pin number  <0-31> 
+
+
+#ifndef SPI_MOSI_PIN
+#define SPI_MOSI_PIN 4
+#endif
+
+// <o> SPI_SS_PIN - Pin number  <0-31> 
+
+
+#ifndef SPI_SS_PIN
+#define SPI_SS_PIN 29
+#endif
+
+// <o> SPI_IRQ_PRIORITY  - Interrupt priority
+ 
+
+// <i> Priorities 0,2 (nRF51) and 0,1,4,5 (nRF52) are reserved for SoftDevice
+// <0=> 0 (highest) 
+// <1=> 1 
+// <2=> 2 
+// <3=> 3 
+// <4=> 4 
+// <5=> 5 
+// <6=> 6 
+// <7=> 7 
+
+#ifndef SPI_IRQ_PRIORITY
+#define SPI_IRQ_PRIORITY 6
+#endif
+
+// </h> 
+//==========================================================
+
+// </h> 
+//==========================================================
+
 // <h> nRF_BLE 
 
 //==========================================================
@@ -1185,13 +1243,13 @@
 // <e> SPI_ENABLED - nrf_drv_spi - SPI/SPIM peripheral driver
 //==========================================================
 #ifndef SPI_ENABLED
-#define SPI_ENABLED 0
+#define SPI_ENABLED 1
 #endif
 #if  SPI_ENABLED
 // <e> SPI_CONFIG_LOG_ENABLED - Enables logging in the module.
 //==========================================================
 #ifndef SPI_CONFIG_LOG_ENABLED
-#define SPI_CONFIG_LOG_ENABLED 0
+#define SPI_CONFIG_LOG_ENABLED 1
 #endif
 #if  SPI_CONFIG_LOG_ENABLED
 // <o> SPI_CONFIG_LOG_LEVEL  - Default Severity level
@@ -1261,7 +1319,7 @@
 // <e> SPI0_ENABLED - Enable SPI0 instance
 //==========================================================
 #ifndef SPI0_ENABLED
-#define SPI0_ENABLED 0
+#define SPI0_ENABLED 1
 #endif
 #if  SPI0_ENABLED
 // <q> SPI0_USE_EASY_DMA  - Use EasyDMA
